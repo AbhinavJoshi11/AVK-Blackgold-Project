@@ -29,7 +29,42 @@
       if (e.target.closest("[data-close-nav]")) closeNav();
       var grp = e.target.closest(".dgroup > button");
       if (grp) grp.parentElement.classList.toggle("open");
+
+      /* ---- tabs ([data-tab] buttons switch [data-panel] panels) ---- */
+      var tabBtn = e.target.closest("[data-tab]");
+      if (tabBtn) {
+        var group = tabBtn.closest("[data-tabs]") || document;
+        var id = tabBtn.getAttribute("data-tab");
+        group.querySelectorAll("[data-tab]").forEach(function (b) {
+          b.classList.toggle("is-active", b === tabBtn);
+        });
+        group.querySelectorAll("[data-panel]").forEach(function (p) {
+          p.classList.toggle("is-active", p.getAttribute("data-panel") === id);
+        });
+      }
+
+      /* ---- accordions (.acc__head toggles its .acc__item) ---- */
+      var accHead = e.target.closest(".acc__head");
+      if (accHead) {
+        var item = accHead.parentElement;
+        var openIt = !item.classList.contains("open");
+        item.classList.toggle("open", openIt);
+        accHead.setAttribute("aria-expanded", openIt);
+      }
+
+      /* ---- go to top ---- */
+      if (e.target.closest("[data-to-top]")) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     });
+
+    /* show / hide the go-to-top button on scroll */
+    var toTop = document.querySelector(".to-top");
+    if (toTop) {
+      var onScroll = function () { toTop.classList.toggle("show", window.scrollY > 400); };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeNav(); closeModal(); } });
 
     /* ---- scroll reveal (with failsafe so nothing stays hidden) ---- */

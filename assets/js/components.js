@@ -140,4 +140,14 @@ function logoSVG() {
   if (page === "index.html" || page === "") {
     document.body.classList.add("is-home");
   }
+
+  /* Global "go to top" button (bottom-right, visible on every page) */
+  if (!document.querySelector(".to-top")) {
+    var top = document.createElement("button");
+    top.className = "to-top";
+    top.setAttribute("data-to-top", "");
+    top.setAttribute("aria-label", "Back to top");
+    top.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>';
+    document.body.appendChild(top);
+  }
 })();
