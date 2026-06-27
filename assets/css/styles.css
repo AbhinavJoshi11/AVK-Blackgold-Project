@@ -20,7 +20,7 @@
   --accent-3:#0ea5e9;
   --accent-ink:#ffffff;
   --yellow:#bcd6f7;
-  --header-bg:rgba(255,255,255,.88);
+  --header-bg:var(--alt-bg);
   --header-ink:#16202b;
   --header-line:#e7edf4;
   --footer-bg:#eef2f7;
@@ -57,7 +57,7 @@ html[data-theme="dark"]{
   --accent-2:#6fabff;
   --accent-3:#38bdf8;
   --yellow:#3a5d86;
-  --header-bg:rgba(13,23,34,.86);
+  --header-bg:var(--alt-bg);
   --header-ink:#e6edf5;
   --header-line:#24344a;
   --footer-bg:#0a1320;
@@ -88,7 +88,7 @@ ul{list-style:none;padding:0}
 /* ---------- LAYOUT ---------- */
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);width:100%}
 .section{padding-block:clamp(56px,8vw,108px)}
-.section--dark{background:var(--alt-bg);color:var(--alt-ink)}
+.section--dark{background:var(--alt-bg);color:var(--alt-ink);padding-block:clamp(56px,8vw,108px)}
 .section--tight{padding-block:clamp(40px,6vw,72px)}
 .grid{display:grid;gap:clamp(20px,2.4vw,32px)}
 .cols-2{grid-template-columns:repeat(2,1fr)}
@@ -109,7 +109,7 @@ p+p{margin-top:1em}
 .prose ul{margin:.6em 0;padding-left:0}
 .prose ul li{position:relative;padding-left:1.5em;margin:.4em 0}
 .prose ul li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;border-radius:3px;background:var(--accent)}
-.prose a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.prose a:not(.btn){color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- BUTTONS ---------- */
 .btn{display:inline-flex;align-items:center;gap:.6em;white-space:nowrap;font-family:var(--ff-display);font-size:.92rem;font-weight:600;
@@ -134,22 +134,19 @@ p+p{margin-top:1em}
 .sec-head .lead{margin-top:.8rem}
 
 /* ---------- TOPBAR + HEADER ---------- */
-.topbar{background:var(--alt-bg);color:var(--muted);font-size:.8rem;border-bottom:1px solid var(--header-line)}
+.topbar{background:var(--alt-bg);color:var(--muted);font-size:.8rem}
 .topbar .wrap{display:flex;justify-content:flex-end;gap:1.1em;padding-block:7px;flex-wrap:wrap}
 .topbar a{display:inline-flex;align-items:center;gap:.4em;font-weight:500;transition:color .2s}
 .topbar a:hover{color:var(--accent)}
 .topbar svg,.footer__social svg{width:15px;height:15px;flex:none}
 
 .header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  color:var(--header-ink);border-bottom:1px solid var(--header-line)}
+  color:var(--header-ink)}
 .header__bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:11px}
 .logo{display:inline-flex;align-items:center;color:var(--header-ink);white-space:nowrap;flex:none}
 .logo .brand-logo{height:46px;width:auto;max-width:none;display:block;flex:none}
 /* header logo enlarged without growing the bar (negative block margins keep the line box height) */
 .header__bar .logo .brand-logo{height:100px;margin-block:-27px}
-/* white logo over the dark hero video (home) and in dark theme */
-body.is-home .header__bar .brand-logo{filter:brightness(0) invert(1)}
-html[data-theme="dark"] .brand-logo{filter:brightness(0) invert(1)}
 .logo b{color:var(--accent)}
 .logo small{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;font-weight:500}
 
@@ -167,12 +164,12 @@ html[data-theme="dark"] .brand-logo{filter:brightness(0) invert(1)}
 .mega::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
 .mega-grid{display:grid;gap:6px}
 .mega-grid.is-3{grid-template-columns:repeat(3,1fr)}
-.mega-card{display:block;padding:16px;border-radius:10px;transition:background .18s}
+.mega-card{display:block;padding:14px 16px;border-radius:10px;transition:background .18s}
 .mega-card:hover{background:var(--surface-2)}
-.mega-card .t{font-family:var(--ff-display);font-weight:700;font-size:1.05rem;color:var(--ink)}
-.mega-card .n{font-size:.8rem;color:var(--muted);margin-top:.3em;line-height:1.45}
-.mega-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mega-tabs h4{font-family:var(--ff-display);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding:8px 16px 4px}
+.mega-card .t{display:block;font-family:var(--ff-display);font-weight:700;font-size:1.02rem;color:var(--ink);margin-bottom:.3em}
+.mega-card .n{display:block;font-size:.8rem;color:var(--muted);line-height:1.5}
+.mega-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.mega-tabs h4{font-family:var(--ff-display);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding:8px 16px 6px}
 .mega-link{display:block;padding:9px 16px;border-radius:8px;font-weight:500;transition:background .15s,padding-left .15s}
 .mega-link:hover{background:var(--surface-2);padding-left:22px}
 
@@ -264,15 +261,15 @@ body.is-home .hero__inner{padding-top:clamp(150px,20vh,240px)}
 .figbox{background:var(--imgbox);border-radius:var(--radius-lg);aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line)}
 .figbox img{width:100%;height:100%;object-fit:cover}
 
-/* inner page hero — clean light banner */
-.phero{background:linear-gradient(135deg,#f4f8fd 0%,#e9f1fb 100%);color:var(--ink);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+/* inner page hero — clean light banner (flat, matches the header tint) */
+.phero{background:var(--alt-bg);color:var(--ink);position:relative;overflow:hidden}
 .phero__glow{position:absolute;inset:0;background:radial-gradient(55% 90% at 88% 120%,rgba(31,111,235,.16),transparent 60%)}
 .phero .wrap{position:relative;padding-block:clamp(64px,10vw,120px)}
 .phero .crumbs{font-family:var(--ff-display);font-size:.8rem;font-weight:500;letter-spacing:.02em;color:var(--muted);margin-bottom:1rem}
 .phero .crumbs a:hover{color:var(--accent)}
 .phero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;letter-spacing:-.025em}
 .phero p{color:var(--muted);max-width:60ch;margin-top:1rem;font-size:1.1rem}
-html[data-theme="dark"] .phero{background:linear-gradient(135deg,#11202f 0%,#16293c 100%)}
+html[data-theme="dark"] .phero{background:var(--alt-bg)}
 html[data-theme="dark"] .phero__glow{background:radial-gradient(55% 90% at 88% 120%,rgba(79,150,255,.22),transparent 60%)}
 
 /* ---------- SPECS / TABLES ---------- */

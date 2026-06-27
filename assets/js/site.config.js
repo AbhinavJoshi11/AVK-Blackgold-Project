@@ -35,7 +35,7 @@ window.SITE = {
   social: [
     { label: "Email", href: "mailto:info@blackgoldinfra.com" },
     { label: "WhatsApp", href: "https://wa.me/919033090399" },
-    { label: "YouTube", href: "#" },
+    { label: "YouTube", href: "https://www.youtube.com/@avkinfragroup" },
     { label: "LinkedIn", href: "#" },
     { label: "Facebook", href: "#" },
     { label: "Instagram", href: "#" },
